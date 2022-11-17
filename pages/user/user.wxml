@@ -1,0 +1,2 @@
+<!--pages/user/user.wxml-->
+<button bindtap="getInfo">登陆</button>
