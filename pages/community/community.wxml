@@ -3,132 +3,87 @@
     <view class = "Transverse"></view>
     <view class = "Vertical"></view>
 </view>
-<view class = "Container">
-    <view class = "InfoAndTime">
-        <view class = "Head">
-            <image class = "userHead" src = "http://www.cnu.cc/uploads/avatar/images/789fdd01e3f995ee62d84160e4aae700_100.jpg">head</image>
+<!-- actionsList为从云数据库拿出的数据 -->
+<block class="messages" wx:for="{{actionsList}}" wx:key="index" wx:for-index="numm">
+    <view class = "message">
+        <view class = "InfoAndTime">
+            <view class = "Head">
+                <image class = "userHead" src = "{{item.faceImg}}">head</image>
+            </view>
+            <view class = "Name">
+                <text class = "userName">{{item.nickName}}</text>
+            </view>
+            <view class = "Time">{{item.time}}</view>
         </view>
-        <view class = "Name">
-            <text class = "userName">Szevasz</text>
+
+        <view class="imags-wrap">
+            <block wx:if="{{item.images.length == 1}}" wx:for="{{item.images}}" wx:for-item="imgItem" wx:key="index" wx:for-index = "indexx">
+                <!-- 单图布局 -->
+                <image src="{{imgItem}}" class="image-1"  bindtap="previewImg" data-src = "{{imgItem}}" data-index = "{{numm}}"></image>
+            </block>
+            <!-- 2-3张图布局 -->
+            <block wx:if="{{item.images.length == 2 || item.images.length == 3}}" wx:for="{{item.images}}" wx:for-item="imgItem" wx:key="index">
+            <image src="{{imgItem}}" class="image-2-3"  bindtap="previewImg" data-src = "{{imgItem}}" data-index = "{{numm}}"></image>
+            </block>
+            <!-- 4图布局 -->
+            <block wx:if="{{item.images.length == 4}}" wx:for="{{item.images}}" wx:for-item="imgItem" wx:key="index">
+            <image src="{{imgItem}}" class="image-4" bindtap="previewImg" data-src = "{{imgItem}}" data-index = "{{numm}}"></image>
+            </block>
+            <!-- 5-9张图布局 -->
+            <block wx:if="{{item.images.length > 4 && item.images.length <= 9}}" wx:for="{{item.images}}" wx:for-item="imgItem" wx:key="index">
+            <image src="{{imgItem}}" class="image-5-9" bindtap="previewImg" data-src = "{{imgItem}}" data-index = "{{numm}}"></image>
+            </block>
+
         </view>
-        <view class = "Time">2022.10.21.8:00</view>
-    </view>
-            <!-- 单图布局 -->
-    <!-- <view class="imags-wrap">
-        <image src="/icon/mountain.png" class="image-1"  bindtap="previewImg" ></image>
-    </view> -->
-        <!-- 2-3张图布局 -->
-    <!-- <view class="imags-wrap">
-        <image src="/icon/mountain.png" class="image-2-3"  bindtap="previewImg" ></image>
-        <image src="/icon/mountain.png" class="image-2-3"  bindtap="previewImg" ></image>
-        <image src="/icon/mountain.png" class="image-2-3"  bindtap="previewImg" ></image>
-    </view> -->
-        <!-- 4图布局 -->
-    <!-- <view class="imags-wrap">
-        <image src="/icon/mountain.png" class="image-4" bindtap="previewImg"></image>
-        <image src="/icon/mountain.png" class="image-4" bindtap="previewImg"></image>
-        <image src="/icon/mountain.png" class="image-4" bindtap="previewImg"></image>
-        <image src="/icon/mountain.png" class="image-4" bindtap="previewImg"></image>
-    </view> -->
-        <!-- 5-9张图布局 -->
-    <view class = "imags-wrap">
-        <image src="http://imgoss.cnu.cc/2210/28/0ec2087d36c23e71a90df74d399f19a1.jpg?x-oss-process=style/content" class="image-5-9" bindtap="previewImg"></image>
-        <image src="http://imgoss.cnu.cc/2210/28/0ec2087d36c23e71a90df74d399f19a1.jpg?x-oss-process=style/content" class="image-5-9" bindtap="previewImg"></image>
-        <image src="http://imgoss.cnu.cc/2210/28/0ec2087d36c23e71a90df74d399f19a1.jpg?x-oss-process=style/content" class="image-5-9" bindtap="previewImg"></image>
-        <image src="http://imgoss.cnu.cc/2210/28/0ec2087d36c23e71a90df74d399f19a1.jpg?x-oss-process=style/content" class="image-5-9" bindtap="previewImg"></image>
-        <image src="http://imgoss.cnu.cc/2210/28/0ec2087d36c23e71a90df74d399f19a1.jpg?x-oss-process=style/content" class="image-5-9" bindtap="previewImg"></image>
-        <image src="http://imgoss.cnu.cc/2210/28/0ec2087d36c23e71a90df74d399f19a1.jpg?x-oss-process=style/content" class="image-5-9" bindtap="previewImg"></image>
-        <image src="http://imgoss.cnu.cc/2210/28/0ec2087d36c23e71a90df74d399f19a1.jpg?x-oss-process=style/content" class="image-5-9" bindtap="previewImg"></image>
-        <image src="http://imgoss.cnu.cc/2210/28/0ec2087d36c23e71a90df74d399f19a1.jpg?x-oss-process=style/content" class="image-5-9" bindtap="previewImg"></image>
-        <image src="http://imgoss.cnu.cc/2210/28/0ec2087d36c23e71a90df74d399f19a1.jpg?x-oss-process=style/content" class="image-5-9" bindtap="previewImg"></image>
+
+        <view class = "TextBox">
+            <view class = "Text">{{item.text}}</view>
+        </view>
+
+        <view class = "Delete-Box">
+            <view class = "Delete" wx:if="{{myOpenid == item._openid}}" catchtap="deleteAction" data-id="{{item._id}}">删除</view>
+        </view>
+
+        <view class = "LikeAndComment">
+            <view class = "Like" catchtap="prizeAction" data-id="{{item._id}}">
+                <image class = "likeicon" src="{{item.isPrized?'/icon/like-active.png':'/icon/like.png'}}"></image>
+            </view>
+            <view class = "Comment">
+                <image class = "commenticon" src="/icon/comment.png" catchtap="commentAction"  data-id="{{item._id}}"></image>
+            </view>
+        </view> 
+
+        <view class = "Like-Box">
+            <block wx:for="{{item.prizeList}}" wx:key="index" wx:for-item="imgItem">
+                 <image class = "like_userhead" src="{{imgItem.faceImg}}"></image>
+             </block>
+        </view>
         
-    </view>
-
-    <view class = "TextBox">
-        <view class = "Text">光光光光光光光光光光光光光光光
-        光光光光光光光光光光光光光光光光光光光光光光光光光光光</view>
-    </view>
-
-    <view class = "Delete-Box">
-        <view class = "Delete">删除</view>
-    </view>
-
-    <view class = "LikeAndComment">
-        <view class = "Like">
-            <image class = "likeicon" src="https://cdn4.iconfinder.com/data/icons/multimedia-75/512/multimedia-11-1024.png"></image>
-        </view>
-        <view class = "Comment">
-            <image class = "commenticon" src="https://cdn3.iconfinder.com/data/icons/communication-278/24/180_-_Communication_bubble_chat_comment_talk_speech_icon-1024.png"></image>
-        </view>
-    </view> 
-
-    <view class = "Like-Box">
-        <image class = "like_userhead" src="http://www.cnu.cc/uploads/avatar/images/789fdd01e3f995ee62d84160e4aae700_100.jpg"></image>
-        <image class = "like_userhead" src="http://www.cnu.cc/uploads/avatar/images/789fdd01e3f995ee62d84160e4aae700_100.jpg"></image>
-        <image class = "like_userhead" src="http://www.cnu.cc/uploads/avatar/images/789fdd01e3f995ee62d84160e4aae700_100.jpg"></image>
-        <image class = "like_userhead" src="http://www.cnu.cc/uploads/avatar/images/789fdd01e3f995ee62d84160e4aae700_100.jpg"></image>
-        <image class = "like_userhead" src="http://www.cnu.cc/uploads/avatar/images/789fdd01e3f995ee62d84160e4aae700_100.jpg"></image>
-        <image class = "like_userhead" src="http://www.cnu.cc/uploads/avatar/images/789fdd01e3f995ee62d84160e4aae700_100.jpg"></image>
-        <image class = "like_userhead" src="http://www.cnu.cc/uploads/avatar/images/789fdd01e3f995ee62d84160e4aae700_100.jpg"></image>
-        <image class = "like_userhead" src="http://www.cnu.cc/uploads/avatar/images/789fdd01e3f995ee62d84160e4aae700_100.jpg"></image>
-        <image class = "like_userhead" src="http://www.cnu.cc/uploads/avatar/images/789fdd01e3f995ee62d84160e4aae700_100.jpg"></image>
-        <image class = "like_userhead" src="http://www.cnu.cc/uploads/avatar/images/789fdd01e3f995ee62d84160e4aae700_100.jpg"></image>
-        <image class = "like_userhead" src="http://www.cnu.cc/uploads/avatar/images/789fdd01e3f995ee62d84160e4aae700_100.jpg"></image>
-        <image class = "like_userhead" src="http://www.cnu.cc/uploads/avatar/images/789fdd01e3f995ee62d84160e4aae700_100.jpg"></image>
-    </view>
-    
-    <view class = "Comcent-Box">
-        <view class = "comcent">
-            <image class = "comcent-userhead" src="http://www.cnu.cc/uploads/avatar/images/789fdd01e3f995ee62d84160e4aae700_100.jpg"></image>
-            <view class = "comcent-info">
-                <view class = "comcent-nameAndtime">
-                    <view class = "comcent-nickname">Szevasz</view>
-                    <view class = "comcent-time">2022-11-2</view>
+        <view class = "Comcent-Box"  wx:if="{{item.commentList.length > 0}}">
+            <block wx:for="{{item.commentList}}" wx:for-item="comItem" wx:for-index="comIndex">
+                <view class = "comcent" bindlongtap="{{myOpenid == comItem.openid?'deleteComment':''}}" data-id="{{item._id}}" data-index="{{comIndex}}" bindtap="replyComment"> 
+                    <image class = "comcent-userhead" src="{{comItem.faceImg}}"></image>
+                    <view class = "comcent-info">
+                        <view class = "comcent-nameAndtime">
+                            <view class = "comcent-nickname">{{comItem.nickName}}</view>
+                            <view class = "comcent-time">{{comItem.time}}</view>
+                        </view>
+                        <view class = "comcent-text">
+                        <text wx:if="{{comItem.toOpenid}}">回复<text>{{comItem.toNickname}}:</text></text>{{comItem.text}}
+                        </view>
+                    </view>
                 </view>
-                <view class = "comcent-text">拍的不错!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</view>
-            </view>
-        </view>
-        <view class = "comcent">
-            <image class = "comcent-userhead" src="http://www.cnu.cc/uploads/avatar/images/789fdd01e3f995ee62d84160e4aae700_100.jpg"></image>
-            <view class = "comcent-info">
-                <view class = "comcent-nameAndtime">
-                    <view class = "comcent-nickname">Szevasz</view>
-                    <view class = "comcent-time">2022-11-2</view>
-                </view>
-                <view class = "comcent-text">
-                回复<text class = "comment-obj">Ptco：</text>谢谢你
-                </view>
-            </view>
-        </view>
-        <view class = "comcent">
-            <image class = "comcent-userhead" src="http://www.cnu.cc/uploads/avatar/images/789fdd01e3f995ee62d84160e4aae700_100.jpg"></image>
-            <view class = "comcent-info">
-                <view class = "comcent-nameAndtime">
-                    <view class = "comcent-nickname">Szevasz</view>
-                    <view class = "comcent-time">2022-11-2</view>
-                </view>
-                <view class = "comcent-text">拍的不错!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</view>
-            </view>
-        </view>
-        <view class = "comcent">
-            <image class = "comcent-userhead" src="http://www.cnu.cc/uploads/avatar/images/789fdd01e3f995ee62d84160e4aae700_100.jpg"></image>
-            <view class = "comcent-info">
-                <view class = "comcent-nameAndtime">
-                    <view class = "comcent-nickname">Szevasz</view>
-                    <view class = "comcent-time">2022-11-2</view>
-                </view>
-                <view class = "comcent-text">拍的不错!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</view>
-            </view>
+            </block>
         </view>
     </view>
-</view>
+</block>
 
 <view class = "blank" style="height: 200rpx;"></view>
-<view class = "pub-comment">
+<view class = "pub-comment" wx:if="{{pubShow == true}}">
     <view class = "pub-left">
-        <input class = "pub-input" placeholder="评论"></input>
+        <input class = "pub-input" placeholder="{{placeHolder}}" bindinput="getInputValue" auto-focus="true" value="{{inputValue}}"></input>
     </view>
-    <view class = "pub-botton">
+    <view class = "pub-botton" bindtap="publishComment">
         发送
     </view>
 </view>

@@ -1,6 +1,7 @@
 /* pages/community/community.wxss */
 page{
     background-color: #657065;
+    
 }
 .Add{
     position: absolute;
@@ -11,6 +12,8 @@ page{
     left: 640rpx;
     border-radius: 50rpx;
     background:rgba(189, 187, 176, 1);
+    position: fixed;
+    z-index: 99;
 }
 .Vertical{
     position: relative;
@@ -29,6 +32,19 @@ page{
     top: 45rpx;
     left: 23rpx;
     border-radius: 20rpx;
+}
+.message{
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    margin-top: 40rpx;
+    margin-left: 5%;
+    max-height: initial;
+    width: 90%;
+    border-radius: 10px;
+    box-shadow: 0px 2px 4px 0px;
+    /* padding-bottom: 15rpx; */
 }
 .InfoAndTime{
     display: flex;
@@ -72,36 +88,37 @@ page{
 }
 .imags-wrap {
     margin-top: 10rpx;
-    margin-left: 100rpx;
     width: 560rpx;
-
   }
   .image-1 {
     width: 500rpx;
     height: 500rpx;
     margin-left: 30rpx;
+    border-radius: 50rpx;
   }
   .image-2-3 {
     width: 180rpx;
     height: 180rpx;
     margin-right: 6rpx;
+    border-radius: 18rpx;
   }
   .image-4 {
     width: 240rpx;
     height: 240rpx;
     margin-left: 25rpx;
+    border-radius: 24rpx;
   }
   .image-5-9 {
     width: 180rpx;
     height: 180rpx;
     margin-right: 6rpx;
+    border-radius: 18rpx;
   }
 .TextBox{
     position: relative;
     width: 600rpx;
     background-color:rgba(138, 137, 124, 1);
     margin-top: 20rpx;
-    left: 78rpx;
     border-radius: 20rpx;
 }
 .Text{
@@ -120,9 +137,9 @@ page{
     display: flex;
     flex-direction: row;
     position: relative;
-    margin-top: 20rpx;
+    margin-top: 10rpx;
     width: 600rpx;
-    left: 78rpx;
+
 }
 .Like{
     position: relative;
@@ -136,7 +153,6 @@ page{
     width: 60rpx;
     height: 60rpx;
     left: 490rpx;
-    top: 8rpx;
     background:#657065;
     /* border-radius: 20rpx; */
 }
@@ -146,8 +162,8 @@ page{
     height: 60rpx;
 }
 .commenticon{
-    width: 40rpx;
-    height: 40rpx;
+    width: 54rpx;
+    height: 54rpx;
 }
 .Like-Box{
     display: flex;
@@ -156,6 +172,7 @@ page{
     background-color: #5b6456;
     position: relative;
     margin:0rpx 60rpx;
+    border-radius: 20rpx;
 }
 .like_userhead{
     width: 60rpx;
@@ -167,15 +184,20 @@ page{
     background-color: #5b6456;
     padding: 20rpx 20rpx;
     margin: 0rpx 60rpx;
+    margin-top: 15rpx;
+    border-radius: 40rpx;
+    margin-bottom: 15rpx;
 }
 .comcent{
     display: flex;
     flex-direction: row;
+    margin-bottom: 10rpx;
 }
 .comcent-userhead{
     width: 80rpx;
     height: 80rpx;
     margin-right: 10rpx;
+    border-radius: 10rpx;
 }
 .comcent-nameAndtime{
     display: flex;

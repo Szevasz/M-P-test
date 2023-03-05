@@ -2,19 +2,11 @@
 <view class = "All">
     <view class = "Title1">M&P 山野</view>
     <view class = "Circle"></view>
-    <image class = "Mountain" src = "https://cdn2.iconfinder.com/data/icons/competitive-strategy-and-corporate-training/512/321_hill_landscape_nature_mountain_scene-1024.png"></image>
+    <image class = "Mountain" src = "/icon/mountain.png"></image>
     <view class = "Title2">M&P COFFEE</view>
-    <view class = "Box1" bindtap="clickpack">
-         <image class = "Coffeepack" src="https://cdn2.iconfinder.com/data/icons/coffee-72/64/coffee-pack-Ground-roasted-1024.png"></image>
-        <view class = "Delivery">自取/外卖</view>
-        <view class = "Delivery1">Delivery/Take away</view>
-    </view>
-    <view class = "Box2" bindtap="clickcup">
-        <image class = "Coffeecup" src = "https://cdn3.iconfinder.com/data/icons/landscape-camping-filled-colour/64/camping-drink-coffee-adventure-1024.png">
-        </image>
-        <view class = "Stare">堂食</view>
-        <view class = "Stare1">Stare</view>
-    </view>
+
+    <image class = "Mountain-Climbing" src = "/icon/climbing.png" style="position: relative; left: 86rpx; top: -294rpx"></image>
+
             
 
 </view>

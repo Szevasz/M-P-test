@@ -1,19 +1,17 @@
 <!--pages/community/add.wxml-->
 
 <view class = "pub-wrap">
-    <view class = "pub-text">Publish</view>
+    <view class = "pub-text" bindtap="submitData">Publish</view>
 </view>
 
-<block wx:for="{{cloudImgList}}" wx:key="index">
-    <view class = "img-wrap">
+<view class = "img-wrap">
+    <block wx:for="{{cloudImgList}}" wx:key="index">
         <view class = "one-img">
             <image src="{{item}}" class = "img-choose"></image>
-            <image src="/icon/close.png" class = "close-img"></image>
+            <image src="/icon/close.png" class = "close-img" bindtap="deleteImg" data-index="{{index}}"></image>
         </view>
-    </view>
-</block>
-<view class = "img-wrap" bindtap="chooseImage">
-    <view class = "one-img">
+    </block>
+    <view class = "one-img" bindtap="chooseImage" wx:if="{{cloudImgList.length < 9}}">
         <image src="/icon/add.png" class = "img-choose"></image>
     </view>
  </view>
